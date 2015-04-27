@@ -5,8 +5,12 @@ class Parcel
     @rarity = rarity
   end
 
-  define_method(:weight_shipping_cost) do
+  define_method(:shipping_cost) do
     weight_cost = 0
+    box_cost = 0
+    rarity_cost = 0
+    total_cost = 0
+
     if @weight.<=(16)
       weight_cost = 100
     elsif @weight.>(16) && @weight.<=(32)
@@ -14,11 +18,8 @@ class Parcel
     else
       weight_cost = 140
     end
-    @weight_cost = weight_cost
-  end
+      @weight_cost = weight_cost
 
-  define_method(:box_shipping_cost) do
-    box_cost = 0
     if @height.<=(12)
       box_cost = 25
     elsif @height.<=(18)
@@ -28,24 +29,17 @@ class Parcel
     else
       box_cost = 40
     end
-    @box_cost=box_cost
+      @box_cost=box_cost
 
-  end
-
-    define_method(:rarity_shipping_cost) do
+    if @rarity.downcase() == "rare"
+      rarity_cost = 75
+    elsif @rarity.downcase() == "uncommon"
+      rarity_cost = 50
+    else
       rarity_cost = 0
-      if @rarity.downcase() == "rare"
-        rarity_cost = 75
-      elsif @rarity.downcase() == "uncommon"
-        rarity_cost = 50
-      else
-        rarity_cost = 0
-      end
-      @rarity_cost = rarity_cost
     end
+      @rarity_cost = rarity_cost
 
-    define_method(:shipping_cost) do
-      total_cost = 0
       total_cost=@weight_cost+@box_cost+@rarity_cost
       total_cost
     end
