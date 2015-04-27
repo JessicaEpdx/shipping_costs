@@ -29,6 +29,7 @@ class Parcel
       box_cost = 40
     end
     @box_cost=box_cost
+
   end
 
     define_method(:rarity_shipping_cost) do
@@ -44,6 +45,9 @@ class Parcel
     end
 
     define_method(:shipping_cost) do
+      total_cost = 0
+      total_cost=@weight_cost+@box_cost+@rarity_cost
+      total_cost
     end
 
 end
