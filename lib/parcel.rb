@@ -31,6 +31,18 @@ class Parcel
     @box_cost=box_cost
   end
 
+    define_method(:rarity_shipping_cost) do
+      rarity_cost = 0
+      if @rarity.downcase() == "rare"
+        rarity_cost = 75
+      elsif @rarity.downcase() == "uncommon"
+        rarity_cost = 50
+      else
+        rarity_cost = 0
+      end
+      @rarity_cost = rarity_cost
+    end
+
     define_method(:shipping_cost) do
     end
 
